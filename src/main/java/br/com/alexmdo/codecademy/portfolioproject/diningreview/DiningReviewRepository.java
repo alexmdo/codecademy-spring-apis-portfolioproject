@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.alexmdo.codecademy.portfolioproject.diningreview.DiningReview.Status;
-
 public interface DiningReviewRepository extends JpaRepository<DiningReview, Long> {
 
-    List<DiningReview> findByStatus(Status status);
-    List<DiningReview> findByRestaurantIdAndStatus(Long restaurantId, Status status);
+    List<DiningReview> findByStatus(DiningReview.Status status);
+
+    List<DiningReview> findByRestaurantIdAndStatus(Long restaurantId, DiningReview.Status status);
 
 }
