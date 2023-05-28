@@ -24,13 +24,8 @@ public class UserService {
 
     @Transactional
     public User updateUser(User user) {
-        var existingUser = userRepository.findById(user.getId())
+        var existingUser = userRepository.findByDisplayName(user.getDisplayName())
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
-
-        // Check if the display name is being modified
-        if (!existingUser.getDisplayName().equals(user.getDisplayName())) {
-            throw new IllegalArgumentException("Cannot modify display name.");
-        }
 
         // Update other fields
         existingUser.setCity(user.getCity());

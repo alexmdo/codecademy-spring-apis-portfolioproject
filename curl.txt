@@ -1,0 +1,93 @@
+1. User Endpoints:
+
+- Create User:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "displayName": "john_doe",
+  "city": "New York",
+  "state": "NY",
+  "zipcode": "10001",
+  "peanutAllergyInterest": true,
+  "eggAllergyInterest": false,
+  "dairyAllergyInterest": true
+}' http://localhost:8080/api/users
+```
+
+- Update User:
+```shell
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "city": "Los Angeles",
+  "state": "CA",
+  "zipcode": "90001",
+  "peanutAllergyInterest": true,
+  "eggAllergyInterest": true,
+  "dairyAllergyInterest": false
+}' http://localhost:8080/api/users/john_doe
+```
+
+- Get User by Display Name:
+```shell
+curl http://localhost:8080/api/users/john_doe
+```
+
+2. Dining Review Endpoints:
+
+- Submit Dining Review:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "submitterDisplayName": "john_doe",
+  "restaurantId": 12345,
+  "peanutScore": 4,
+  "eggScore": 3,
+  "dairyScore": 5,
+  "commentary": "Great experience!",
+  "status": "PENDING"
+}' http://localhost:8080/api/dining-reviews?userDisplayName=john_doe
+```
+
+- Get Pending Dining Reviews:
+```shell
+curl http://localhost:8080/api/dining-reviews/pending
+```
+
+- Approve Dining Review:
+```shell
+curl -X PUT http://localhost:8080/api/dining-reviews/123/approve
+```
+
+- Reject Dining Review:
+```shell
+curl -X PUT http://localhost:8080/api/dining-reviews/123/reject
+```
+
+- Get Approved Dining Reviews for Restaurant:
+```shell
+curl http://localhost:8080/api/restaurants/12345/dining-reviews/approved
+```
+
+3. Restaurant Endpoints:
+
+- Create Restaurant:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "name": "ABC Restaurant",
+  "address": "123 Main St",
+  "zipCode": "10001",
+  "peanutScore": 4.5,
+  "eggScore": 3.8,
+  "dairyScore": 4.2,
+  "overallScore": 4.3
+}' http://localhost:8080/api/restaurants
+```
+
+- Get Restaurant by ID:
+```shell
+curl http://localhost:8080/api/restaurants/12345
+```
+
+- Search Restaurants by Zip Code and Allergy:
+```shell
+curl "http://localhost:8080/api/restaurants/search?zipCode=10001&allergy=peanut"
+```
+
+Note: Replace `http://localhost:8080` with the appropriate base URL of your API server. Also, make sure to provide valid IDs, display names, and other required parameters in the requests based on your data.
